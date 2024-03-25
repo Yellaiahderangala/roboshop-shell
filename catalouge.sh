@@ -28,36 +28,36 @@ else
 echo -e  "  you are root user "
 fi # fi means reverse of if , indicating condition end
 
-dnf module disable nodejs -y
-VALIDATE $? "Disabling current nodejs" &>> $LOGFILE
+dnf module disable nodejs -y &>> $LOGFILE
+VALIDATE $? "Disabling current nodejs" 
 
-dnf module enable nodejs:18 -y
-VALIDATE $? "Enabling nodejs 18" &>> $LOGFILE
+dnf module enable nodejs:18 -y &>> $LOGFILE
+VALIDATE $? "Enabling nodejs 18" 
 
-dnf install nodejs -y
-VALIDATE $? "Installing nodejs 18" &>> $LOGFILE
+dnf install nodejs -y &>> $LOGFILE
+VALIDATE $? "Installing nodejs 18" 
 
-useradd roboshop
-VALIDATE $? "creating roboshop user" &>> $LOGFILE
+useradd roboshop &>> $LOGFILE
+VALIDATE $? "creating roboshop user" 
 
-mkdir /app
-VALIDATE $? "creating app directory" &>> $LOGFILE
+mkdir /app &>> $LOGFILE
+VALIDATE $? "creating app directory" 
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-VALIDATE $? "downloading catalouge app" &>> $LOGFILE
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+VALIDATE $? "downloading catalouge app" 
 
 cd /app
 
-unzip /tmp/catalogue.zip
-VALIDATE $? "unzipping catalouge " &>> $LOGFILE
+unzip /tmp/catalogue.zip &>> $LOGFILE
+VALIDATE $? "unzipping catalouge " 
 
-npm install 
-VALIDATE $? "installing dependencies " &>> $LOGFILE
+npm install &>> $LOGFILE
+VALIDATE $? "installing dependencies " 
 
 #use absolute path because catalouge.service exists there
-cp /home/centos/roboshop-shell/catalouge.service /etc/systemd/system/catalogue.service
+cp /home/centos/roboshop-shell/catalouge.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 
-VALIDATE $? "copying catalouge,service file" &>> $LOGFILE
+VALIDATE $? "copying catalouge,service file" 
 
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "catalouge daemon reload " &>> $LOGFILE
