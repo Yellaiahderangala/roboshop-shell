@@ -76,4 +76,4 @@ dnf install mongodb-org-shell -y
 VALIDATE $? "installing  mangodb client"
 
 mongo --host $MONGODB_HOST </app/schema/catalogue.js
-
+VALIDATE $? "Loading catalouge data into mongodb"
